@@ -20,7 +20,6 @@ public class SelectBalloonServlet extends HttpServlet {
     public SelectBalloonServlet(SpringTemplateEngine springTemplateEngine, BalloonService balloonService) {
         this.springTemplateEngine = springTemplateEngine;
         this.balloonService = balloonService;
-
     }
 
     @Override
@@ -30,11 +29,11 @@ public class SelectBalloonServlet extends HttpServlet {
 
     }
 
-        @Override
-        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            String balloonSize = req.getParameter("size");
-            req.getSession().setAttribute("balloonSize",balloonSize);
-            resp.sendRedirect("/BalloonOrder");
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String balloonSize = req.getParameter("size");
+        req.getSession().setAttribute("balloonSize",balloonSize);
+        resp.sendRedirect("/BalloonOrder.do");
 
-        }
+    }
 }
