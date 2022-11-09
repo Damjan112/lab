@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "balloonorder", urlPatterns = "/BalloonOrder.do")
+@WebServlet(name = "balloonorder", urlPatterns = "/servlet/BalloonOrder.do")
 public class BalloonOrderServlet  extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
@@ -38,7 +38,7 @@ public class BalloonOrderServlet  extends HttpServlet {
         req.getSession().setAttribute("clientBrowser",req.getHeader("User-Agent"));
         req.getSession().setAttribute("clientName", clientName);
         req.getSession().setAttribute("clientAddress", clientAddress);
-        resp.sendRedirect("/ConfirmationInfo");
+        resp.sendRedirect("/servlet/ConfirmationInfo");
 
     }
 }

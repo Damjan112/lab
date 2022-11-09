@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "balloonlistservlet", urlPatterns = "/balloons")
+@WebServlet(name = "balloonlistservlet", urlPatterns = "/servlet/balloons")
 public class BalloonListServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
@@ -36,7 +36,7 @@ public class BalloonListServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String balloonColor=req.getParameter("color");
         req.getSession().setAttribute("balloonColor", balloonColor);
-        resp.sendRedirect("/selectBalloon");
+        resp.sendRedirect("/servlet/selectBalloon");
 
     }
 }

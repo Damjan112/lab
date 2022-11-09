@@ -1,36 +1,58 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <title>Balloon Order page - Welcome and choose a Balloon</title>
-    <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
-    </style>
-</head>
-<body>
-
-<h2>Balloons</h2>
-<ul>
-    <li th:each="balloon: ${balloons}"><th:block th:text="${balloon.name}"/>
-        (<th:block th:text="${balloon.description}"/>)</li>
-</ul>
-
-<header>
-    <h1>Welcome to our Balloon Shop App</h1>
-</header>
-<main>
-    <form th:method="POST" th:action="@{/balloons}" >
-        <h2>Choose balloon color:</h2>
+<div xmlns:th="http://www.thymeleaf.org">
+    <h2>Ballons</h2>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${balloons.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Balloon name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Manufacturer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="balloon : ${balloons}" class="balloon">
+                            <td th:text="${balloon.getName()}"></td>
+                            <td th:text="${balloon.getDescription()}"></td>
+                            <td th:text="${balloon.getManufacturer() != null}
+                            ? ${balloon.getManufacturer().getName()} : 'No Manufacturer'"></td>
+                            <td class="text-right">
+                                    <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}"
+                                          th:method="DELETE">
+                                        <button type="submit" class="btn btn-sm btn-danger delete-balloon"><i
+                                                class="fa fa-trash">Delete</i></button>
+                                    </form>
+                                    <a th:href="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}"
+                                       class="btn btn-sm btn-info edit-balloon"><i class="fa fa-trash">Edit</i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col mb-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                            <a href="/balloons/add-form" class="btn btn-block btn-dark add-balloon-btn">Add new
+                                balloon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Choose balloon color:</h2>
+    <form method="post" action="/servlet/balloons">
         <input type="radio" name="color" value="Red Balloon"> Red Balloon<br/>
         <input type="radio" name="color" value="Green Balloon"> Green Balloon<br/>
         <input type="radio" name="color" value="Yellow Balloon"> Yellow Balloon<br/>
         <input type="radio" name="color" value="Blue Balloon"> Blue Balloon<br/>
 
         <br/>
-        <button type="submit">Submit</button>
+        <div th:if="${hasError}">
+            <div th:text="${error}" class="text-danger"></div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
-</main>
-</body>
-</html>
+</div>

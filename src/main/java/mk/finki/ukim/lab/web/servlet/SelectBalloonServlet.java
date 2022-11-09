@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "selectballoonservlet", urlPatterns = "/selectBalloon")
+@WebServlet(name = "selectballoonservlet", urlPatterns = "/servlet/selectBalloon")
 public class SelectBalloonServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
@@ -33,7 +33,7 @@ public class SelectBalloonServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String balloonSize = req.getParameter("size");
         req.getSession().setAttribute("balloonSize",balloonSize);
-        resp.sendRedirect("/BalloonOrder.do");
+        resp.sendRedirect("/servlet/BalloonOrder.do");
 
     }
 }
